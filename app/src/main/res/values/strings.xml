@@ -3,4 +3,15 @@
     <string name="app_version">1.9.5</string>
     <string name="thongbaoloi">Lỗi không xác định</string>
     <string name="ketnoiloi">Bị lỗi khi kết nối cơ sở dữ liệu</string>
+    <string name="channel_manage">Quản lý kênh tin tức</string>
+
+
+
+    <!-- Bên trái của trang -->
+    <string name="photo">Hình ảnh</string>
+    <string name="video">Video</string>
+    <string name="notification">Thông báo</string>
+    <string name="weather">Thời tiết</string>
+    <string name="settings">Cài đặt</string>
+    <string name="news">Tin tức</string>
 </resources>

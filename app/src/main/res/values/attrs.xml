@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Màu nền trang, sử dụng cho màu nền và trong suốt khi trượt hệ thống. Thuộc tính tùy biến-->
+    <attr name="backgroundColor" format="color|reference"/>
+
+    <!--Màu của button khi bị treo-->
+    <attr name="fabColor" format="color|reference"/>
+
+    <!--Icon thanh nav trạng thái và màu chữ-->
+    <attr name="navColor" format="reference|reference"/>
+
+    <!--Thêm thanh toolbar-->
+    <attr name="toolbarTheme" format="reference"/>
+
+    <!--Màu nền quản lý kênh tin tức-->
+    <attr name="itemChannelBackground" format="reference"/>
+
+    <!--Nền thanh navgivation avatar-->
+    <attr name="navHeaderBackground" format="reference"/>
+
+    <!--Đổi màu khi trạng thái CheckedTextView được chọn-->
+    <attr name="checkTextViewColorStateList" format="reference"/>
+
+    <declare-styleable name="PacManRefreshHead">
+        <attr name="pacIconColor" format="color|reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="ThreePointLoadingView">
+        <attr name="pointColor" format="color|reference"/>
+    </declare-styleable>
+
+</resources>

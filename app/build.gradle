@@ -1,3 +1,6 @@
+//Android Studio sử dụng Gradle để build app.
+// File này cho biết build với android sdk thấp nhất bao nhiêu.
+// Có hỗ trợ run instance không.....
 apply plugin: 'com.android.application'
 
 android {
@@ -6,21 +9,103 @@ android {
 
     defaultConfig {
         applicationId "com.example.vanloc.apptintuc"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
+
+    // WHY? http://blog.appconus.com/2015/11/23/516/
+    signingConfigs {
+        demo {
+            storeFile file("../exercise.jks")
+            storePassword "12345678"
+            keyAlias 'oubowu'
+            keyPassword "12345678"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.demo
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            shrinkResources true
+            signingConfig signingConfigs.demo
+        }
+    }
+
+
+    // Đổi tên ứng dụng khi được tạo ra. Build > Generate Signed APK...
+    applicationVariants.all { variant ->
+
+        if (variant.buildType.name.equals('release') || variant.buildType.name.equals('debug')) {
+            variant.outputs.each { output ->
+                def appName = 'AppTinTuc'
+                def oldFile = output.outputFile
+                def buildName = ''
+
+                variant.productFlavors.each { product ->
+                    buildName = product.name
+                }
+
+                def releaseApkName = appName + '-' + defaultConfig.versionName + "-" + variant.buildType.name + '.apk'
+                output.outputFile = new File(oldFile.parent, releaseApkName)
+            }
+        }
+    }
+
+    // Giải quyết xung đột Butterknife và Lombok
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'src/main/java-gen']
         }
     }
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
+
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.android.support:cardview-v7:23.3.0'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.1.3'
+    compile 'com.github.bumptech.glide:glide:3.6.1'
+    // 使用okhttp3加载图片
+    compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
+    compile 'com.squareup.retrofit2:retrofit:2.0.0'
+    compile 'com.squareup.retrofit2:converter-jackson:2.0.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+    compile 'de.greenrobot:greendao:2.1.0'
+    compile 'zhou.widget:richtext:1.0.4'
+    compile 'com.commit451:PhotoView:1.2.4'
+    compile 'com.github.zhaokaiqiang.klog:library:1.4.0'
+    //    compile project(':vitamio')
+    //    compile project(':changeskin')
+    //
+    //    compile('com.github.afollestad.material-dialogs:core:0.8.5.5@aar') {
+    //        transitive = true
+    //    }
 }
