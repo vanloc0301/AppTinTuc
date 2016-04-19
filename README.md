@@ -11,7 +11,7 @@ chủ yếu để tạo ra những gì mình thích.
 
 # Giao diện #
 
-[](/app/src/main/res/drawable/Activity.png) (Giao diện chính)
+[](app/src/main/res/drawable/Activity.png) (Giao diện chính)
 
 # Dữ liệu lấy từ đâu? #
 
