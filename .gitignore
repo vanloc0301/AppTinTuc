@@ -1,0 +1,10 @@
+# đọc bài này đi ku.
+# http://blog.appconus.com/2015/08/06/git-ignore-va-lam-viec-voi-gitignore/
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
